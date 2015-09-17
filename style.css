@@ -1,0 +1,6 @@
+ body { font-family: sans-serif; }
+ th { font-weight: bold; text-align: right; }
+
+ @media print {
+	 .noprint { display: none; }
+ }
