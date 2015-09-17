@@ -1,4 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (Buffer){
 // run file through browserify:
 // browserify main.js > bundle.js
 
@@ -72,7 +73,9 @@ function processSpec(spec) {
 $(document).ready(function() {
   var h = location.hash.substr(1);
   if(h !== '') {
-    processSpec(JSON.parse(decodeURIComponent(h)));
+    processSpec(JSON.parse(
+      new Buffer(decodeURIComponent(h), 'base64').toString('ascii')
+    ));
   }
 
   $('#hostForm').submit(function(ev) {
@@ -83,12 +86,15 @@ $(document).ready(function() {
         gw = $('#gateway').val();
 
     var spec = { hn: hostName, sm: subnetMask, gw: gw };
-    location.hash = encodeURIComponent(JSON.stringify(spec));
+    location.hash = encodeURIComponent(
+      new Buffer(JSON.stringify(spec)).toString('base64')
+    );
     processSpec(spec);
   });
 });
 
-},{"ip":7}],2:[function(require,module,exports){
+}).call(this,require("buffer").Buffer)
+},{"buffer":2,"ip":7}],2:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.

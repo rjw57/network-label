@@ -71,7 +71,9 @@ function processSpec(spec) {
 $(document).ready(function() {
   var h = location.hash.substr(1);
   if(h !== '') {
-    processSpec(JSON.parse(decodeURIComponent(h)));
+    processSpec(JSON.parse(
+      new Buffer(decodeURIComponent(h), 'base64').toString('ascii')
+    ));
   }
 
   $('#hostForm').submit(function(ev) {
@@ -82,7 +84,9 @@ $(document).ready(function() {
         gw = $('#gateway').val();
 
     var spec = { hn: hostName, sm: subnetMask, gw: gw };
-    location.hash = encodeURIComponent(JSON.stringify(spec));
+    location.hash = encodeURIComponent(
+      new Buffer(JSON.stringify(spec)).toString('base64')
+    );
     processSpec(spec);
   });
 });
