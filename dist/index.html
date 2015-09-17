@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Network label generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noprint">
+    <h1>Enter domain</h1>
+    <p>This form is hidden when printed.</p>
+    <form id="hostForm">
+      <p>
+      <input type="text" id="hostName" placeholder="example.com">
+      /
+      <input type="text" id="prefixLen" placeholder="24" value="22">
+      <input type="submit" value="Go">
+      </p>
+      <aside>
+        (GW @ <input type="text" id="gateway"
+          placeholder="0.0.0.1" value="0.0.0.250">)
+      </aside>
+    </form>
+  </div>
+
+  <h2 class="noprint">Label</h2>
+
+  <table>
+    <tbody id="outputTable">
+      <tr><td>Enter information above.</td></tr>
+    </tbody>
+  </table>
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="bundle.js"></script>
+</body>
+</html>
